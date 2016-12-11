@@ -22,7 +22,10 @@
 ## SOFTWARE.
 ##
 
+require 'date'
 require 'json'
+require 'nokogiri'
+
 
 class PinyinConverter
 
@@ -222,14 +225,53 @@ class JsonStructurizer < GenericStructurizer
 end
 
 class XmlStructurizer < GenericStructurizer
-    def initialize
-        raise 'XML structurizer is not implemented yet.'
+    def document_preamble
+        date = DateTime.now.iso8601
+        return '<?xml version="1.0" encoding="utf-8" ?>' + "\n" +
+            "<cc-cedict created=\"#{date}\">\n"
+    end
+
+    def document_postamble
+        return '</cc-cedict>'
+    end
+
+    def object_prefix(object)
+        return ''
+    end
+
+    def object_postfix(object)
+        return "\n"
+    end
+
+    def object_data(object)
+        builder = Nokogiri::XML::Builder.new do |xml|
+            xml.entry {
+                xml.traditional object[:traditional]
+                xml.simplified object[:simplified]
+                xml.send('referenced-traditional') {
+                    object[:referencedTraditional].each { |c| xml.character c }
+                }
+                xml.send('referenced-simplified') {
+                    object[:referencedSimplified].each { |c| xml.character c }
+                }
+                xml.send('pinyin-numeric', object[:pinyinNumeric])
+                xml.send('pinyin-diacritic', object[:pinyinDiacritic])
+                xml.definitions {
+                    object[:definitions].each { |c| xml.definition c }
+                }
+                xml.send('definitions-diacritic') {
+                    object[:definitionsDiacritic].each { |c| xml.definition c }
+                }
+            }
+        end
+
+        return builder.doc.root.to_xml
     end
 end
 
 class CsvStructurizer < GenericStructurizer
-    def initialize
-        raise 'XML structurizer is not implemented yet.'
+    def structurize(definition_file, output_file)
+        STDERR.puts 'CSV structurizer is not implemented yet.'
     end
 end
 
