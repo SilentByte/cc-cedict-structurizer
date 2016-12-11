@@ -270,8 +270,31 @@ class XmlStructurizer < GenericStructurizer
 end
 
 class CsvStructurizer < GenericStructurizer
-    def structurize(definition_file, output_file)
-        STDERR.puts 'CSV structurizer is not implemented yet.'
+    def document_preamble
+        return "traditional\tsimplified\treferenced-traditional\treferenced-simplified\tpinyin-numeric\tpinyin-diacritic\tdefinitions\tdefinitions-diacritic\n"
+    end
+
+    def document_postamble
+        return ''
+    end
+
+    def object_prefix(object)
+        return ''
+    end
+
+    def object_postfix(object)
+        return "\n"
+    end
+
+    def object_data(object)
+        return object[:traditional] + "\t" +
+               object[:simplified] + "\t" +
+               object[:referencedTraditional].join('/') + "\t" +
+               object[:referencedSimplified].join('/') + "\t" +
+               object[:pinyinNumeric] + "\t" +
+               object[:pinyinDiacritic] + "\t" +
+               object[:definitions].join('/') + "\t" +
+               object[:definitionsDiacritic].join('/')
     end
 end
 
