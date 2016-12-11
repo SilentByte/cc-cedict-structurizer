@@ -9,7 +9,9 @@ all:
 	@echo '  make xml          Generate XML output files.'
 	@echo '  make csv          Generate CSV output files.'
 
-update: ./cc-cedict/cc-cedict.u8
+update:
+	mkdir -p ./cc-cedict/
+	curl 'https://www.mdbg.net/chindict/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz' | gzip -d >./cc-cedict/cc-cedict.u8
 
 everything: update json xml csv
 
@@ -23,11 +25,12 @@ csv: ./cc-cedict/cc-cedict.csv
 	mkdir -p ./cc-cedict/
 	curl 'https://www.mdbg.net/chindict/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz' | gzip -d >./cc-cedict/cc-cedict.u8
 
-./cc-cedict/cc-cedict.json:
-	@echo 'JSON output is not yet implemented.'
+./cc-cedict/cc-cedict.json: ./cc-cedict/cc-cedict.u8
+	ruby structurizer.rb json ./cc-cedict/cc-cedict.u8 ./cc-cedict/cc-cedict.json
 
-./cc-cedict/cc-cedict.xml:
-	@echo 'XML output is not yet implemented.'
+./cc-cedict/cc-cedict.xml: ./cc-cedict/cc-cedict.u8
+	ruby structurizer.rb xml ./cc-cedict/cc-cedict.u8 ./cc-cedict/cc-cedict.xml
 
-./cc-cedict/cc-cedict.csv:
-	@echo 'CSV output is not yet implemented.'
+./cc-cedict/cc-cedict.csv: ./cc-cedict/cc-cedict.u8
+	ruby structurizer.rb csv ./cc-cedict/cc-cedict.u8 ./cc-cedict/cc-cedict.csv
+
