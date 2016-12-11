@@ -4,10 +4,31 @@ CC-CEDICT Structurizer
 
 This program is designed to extract and process entries from the CC-CEDICT Chinese/English Dictionary and output structured data (i.e. JSON, XML, CSV) for further usage.
 
+The files in this repository provide the following structured information *for each word* from the dictionary:
+
+* Traditional Chinese characters
+* Simplified Chinese characters
+* Referenced traditional Chinese characters
+* Referenced simplified Chinese characters
+* Numeric Pinyin (e.g. Zhong1guo2)
+* Diacritic Pinyin (e.g. Zhōngguó)
+* English definitions
+
 The relevant data can be found here:
 https://www.mdbg.net/chindict/chindict.php?page=cedict
 
 
+## General Usage
+All output files (JSON, XML, and CSV) are directly provided with this repository and made available for use. A manual update can be triggered using the provided makefile. Ruby 2.3.0 and the Nokogiri gem (XML) are required.
+
+```make
+CC-CEDICT Structurizer Usage
+  make update       Update the CC-CEDICT dictionary definitions.
+  make everything   Generate JSON, XML, and CSV output files.
+  make json         Generate JSON output files.
+  make xml          Generate XML output files.
+  make csv          Generate CSV output files.
+```
 
 ## Licensing
 
