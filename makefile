@@ -10,7 +10,6 @@ all:
 	@echo '  make csv          Generate CSV output files.'
 
 clean:
-	rm -f ./cc-cedict/cc-cedict.u8
 	rm -f ./cc-cedict/cc-cedict.json
 	rm -f ./cc-cedict/cc-cedict.xml
 	rm -f ./cc-cedict/cc-cedict.csv
