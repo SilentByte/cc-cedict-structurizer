@@ -23,8 +23,9 @@ All output files (JSON, XML, and CSV) are directly provided with this repository
 
 ```make
 CC-CEDICT Structurizer Usage
-  make update       Update the CC-CEDICT dictionary definitions.
-  make everything   Generate JSON, XML, and CSV output files.
+  make update       Update CC-CEDICT dictionary definitions.
+  make everything   Update CC-CEDICT dictionary and generate all output files.
+  make generate     Generate all output files.
   make json         Generate JSON output files.
   make xml          Generate XML output files.
   make csv          Generate CSV output files.
