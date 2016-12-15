@@ -6,16 +6,17 @@ This program is designed to extract and process entries from the CC-CEDICT Chine
 
 The files in this repository provide the following structured information *for each word* from the dictionary:
 
-* Traditional Chinese characters
-* Simplified Chinese characters
-* Referenced traditional Chinese characters
-* Referenced simplified Chinese characters
+* Chinese words using traditional characters
+* Chinese words using simplified characters
+* Referenced traditional Chinese characters (including code points)
+* Referenced simplified Chinese characters (including code points)
 * Numeric Pinyin (e.g. Zhong1guo2)
 * Diacritic Pinyin (e.g. Zhōngguó)
 * English definitions
 
 The relevant data can be found here:
 https://www.mdbg.net/chindict/chindict.php?page=cedict
+
 
 
 ## General Usage
@@ -31,7 +32,10 @@ CC-CEDICT Structurizer Usage
   make csv          Generate CSV output files.
 ```
 
+
 ## Licensing
+
+### CC-CEDICT Structurizer
 
 MIT License
 
@@ -54,4 +58,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+
+### CC-CEDICT Dictionary Data
+
+Creative Commons Attribution-Share Alike 3.0 License
+
+More details under:
+https://creativecommons.org/licenses/by-sa/3.0/
+
 
