@@ -120,7 +120,9 @@ class CedictParser
     end
 
     def get_characters(characters)
-        return characters.scan(/\p{Han}/)
+        return characters.scan(/\p{Han}/).collect do |c|
+            {:cp => c.ord.to_s(16), :c => c}
+        end
     end
 
     def get_numeric_pinyin(pinyin)
@@ -289,8 +291,8 @@ class CsvStructurizer < GenericStructurizer
     def object_data(object)
         return object[:traditional] + "\t" +
                object[:simplified] + "\t" +
-               object[:referencedTraditional].join('/') + "\t" +
-               object[:referencedSimplified].join('/') + "\t" +
+               object[:referencedTraditional].collect {|c| c[:c]}.join('/') + "\t" +
+               object[:referencedSimplified].collect {|c| c[:c]}.join('/') + "\t" +
                object[:pinyinNumeric] + "\t" +
                object[:pinyinDiacritic] + "\t" +
                object[:definitions].join('/') + "\t" +
