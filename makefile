@@ -17,7 +17,7 @@ clean:
 
 update:
 	mkdir -p ./cc-cedict/
-	curl 'https://www.mdbg.net/chindict/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz' | gzip -d >./cc-cedict/cc-cedict.u8
+	curl -L 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz' | gzip -d >./cc-cedict/cc-cedict.u8
 
 everything: update generate
 
@@ -31,7 +31,7 @@ csv: ./cc-cedict/cc-cedict.csv
 
 ./cc-cedict/cc-cedict.u8:
 	mkdir -p ./cc-cedict/
-	curl 'https://www.mdbg.net/chindict/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz' | gzip -d >./cc-cedict/cc-cedict.u8
+	curl -L 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz' | gzip -d >./cc-cedict/cc-cedict.u8
 
 ./cc-cedict/cc-cedict.json: ./cc-cedict/cc-cedict.u8
 	ruby structurizer.rb json ./cc-cedict/cc-cedict.u8 ./cc-cedict/cc-cedict.json
